@@ -16,16 +16,15 @@ var pkgPath = findPkg.sync(process.cwd(), 1);
 var cwd = path.dirname(pkgPath);
 
 /**
- * Execute `yarn add` with the given `args`, package `names`
- * and callback.
+ * Run `yarn` with the given `cmds`, `args` and callback.
  *
  * ```js
- * yarn('--save', ['isobject'], function(err) {
+ * yarn(['add', 'isobject'], function(err) {
  *   if (err) throw err;
  * });
  * ```
+ * @param {String|Array} `cmds`
  * @param {String|Array} `args`
- * @param {String|Array} `names`
  * @param {Function} `cb` Callback
  * @details false
  * @api public
@@ -46,14 +45,13 @@ function yarn(cmds, args, cb) {
 
 /**
  * Symlink the current project to global `node_modules`.
- * Visit the yarn docs for [link](https://yarnpkg.com/en/docs/cli/link).
+ * Visit the yarn docs for [link][cli]{link}.
  *
  * ```js
  * yarn.link(function(err) {
  *   if (err) throw err;
  * });
  * ```
- * @name .link
  * @param {Function} `cb` Callback
  * @api public
  */
@@ -64,14 +62,13 @@ yarn.link = function(args, cb) {
 
 /**
  * Unlink a previously created symlink for a package.
- * Visit the yarn docs for [unlink](https://yarnpkg.com/en/docs/cli/unlink).
+ * Visit the yarn docs for [unlink][cli]{unlink}.
  *
  * ```js
  * yarn.unlink(function(err) {
  *   if (err) throw err;
  * });
  * ```
- * @name .unlink
  * @param {Function} `cb` Callback
  * @api public
  */
@@ -83,14 +80,13 @@ yarn.unlink = function(args, cb) {
 /**
  * Installs one or more packages and any packages they depend on.
  *
- * Visit the yarn docs for [add](https://yarnpkg.com/en/docs/cli/add).
+ * Visit the yarn docs for [add][cli]{add}.
  *
  * ```js
  * yarn.add('isobject', function(err) {
  *   if (err) throw err;
  * });
  * ```
- * @name .add
  * @param {String|Array} `names` package names
  * @param {Function} `cb` Callback
  * @api public
@@ -101,18 +97,35 @@ yarn.add = function(args, cb) {
 };
 
 /**
+ * Execute `yarn add --global` with one or more package `names`.
+ *
+ * ```js
+ * yarn.global('mocha', function(err) {
+ *   if (err) throw err;
+ * });
+ * ```
+ * @name .global
+ * @param {String|Array} `names` One or more package names to install
+ * @param  {Function} `cb` Callback
+ * @api public
+ */
+
+yarn.global = function(names, cb) {
+  yarn('global', ['add'].concat(names), cb);
+};
+
+/**
  * Install all dependencies for a project. This is most commonly used when
  * you have just checked out code for a project, or when another developer
  * on the project has added a new dependency that you need to pick up.
  *
- * Visit the yarn docs for [install](https://yarnpkg.com/en/docs/cli/install).
+ * Visit the yarn docs for [install][cli]{install}.
  *
  * ```js
  * yarn.install(function(err) {
  *   if (err) throw err;
  * });
  * ```
- * @name .install
  * @param {Function} `cb` Callback
  * @api public
  */
@@ -124,14 +137,13 @@ yarn.install = function(args, cb) {
 /**
  * Checks for outdated package dependencies.
  *
- * Visit the yarn docs for [outdated](https://yarnpkg.com/en/docs/cli/outdated).
+ * Visit the yarn docs for [outdated][cli]{outdated}
  *
  * ```js
  * yarn.outdated('isobject', function(err) {
  *   if (err) throw err;
  * });
  * ```
- * @name .outdated
  * @param {String|Array} `names` package names
  * @param {Function} `cb` Callback
  * @api public
@@ -146,20 +158,58 @@ yarn.outdated = function(args, cb) {
  * range specified in the package.json file. The `yarn.lock` file will be
  * (re)created as well.
  *
- * Visit the yarn docs for [upgrade](https://yarnpkg.com/en/docs/cli/upgrade).
+ * Visit the yarn docs for [upgrade][cli]{upgrade}.
  *
  * ```js
  * yarn.upgrade(function(err) {
  *   if (err) throw err;
  * });
  * ```
- * @name .upgrade
  * @param {Function} `cb` Callback
  * @api public
  */
 
 yarn.upgrade = function(args, cb) {
   yarn('upgrade', args, cb);
+};
+
+/**
+ * Remove a package from your direct dependencies, updating
+ * your package.json and yarn.lock files in the process.
+ *
+ * Visit the yarn docs for [remove][cli]{remove}.
+ *
+ * ```js
+ * yarn.remove('isobject', function(err) {
+ *   if (err) throw err;
+ * });
+ * ```
+ * @param {Function} `args`
+ * @param {Function} `cb` Callback
+ * @api public
+ */
+
+yarn.remove = function(args, cb) {
+  yarn('remove', args, cb);
+};
+
+/**
+ * Show information about why a package is installed.
+ *
+ * Visit the yarn docs for [why][cli]{why}.
+ *
+ * ```js
+ * yarn.why('isobject', function(err) {
+ *   if (err) throw err;
+ * });
+ * ```
+ * @param {Function} `args`
+ * @param {Function} `cb` Callback
+ * @api public
+ */
+
+yarn.why = function(args, cb) {
+  yarn('why', args, cb);
 };
 
 /**
@@ -171,7 +221,6 @@ yarn.upgrade = function(args, cb) {
  *   if (err) throw err;
  * });
  * ```
- * @name .dependencies
  * @param {String|Array} `names` One or more package names to install
  * @param {Function} `cb` Callback
  * @api public
@@ -196,7 +245,6 @@ yarn.dependencies = function(names, cb) {
  *   if (err) throw err;
  * });
  * ```
- * @name .devDependencies
  * @param {String|Array} `names` One or more package names to install
  * @param {Function} `cb` Callback
  * @api public
@@ -215,7 +263,6 @@ yarn.devDependencies = function(names, cb) {
  *   if (err) throw err;
  * });
  * ```
- * @name .peerDependencies
  * @param {String|Array} `names` One or more package names to install
  * @param {Function} `cb` Callback
  * @api public
@@ -234,7 +281,6 @@ yarn.peerDependencies = function(names, cb) {
  *   if (err) throw err;
  * });
  * ```
- * @name .optionalDependencies
  * @param {String|Array} `names` One or more package names to install
  * @param {Function} `cb` Callback
  * @api public
@@ -242,24 +288,6 @@ yarn.peerDependencies = function(names, cb) {
 
 yarn.optionalDependencies = function(names, cb) {
   deps('optionalDependencies', '-O', names, cb);
-};
-
-/**
- * Execute `yarn add --global` with one or more package `names`.
- *
- * ```js
- * yarn.global('mocha', function(err) {
- *   if (err) throw err;
- * });
- * ```
- * @name .global
- * @param {String|Array} `names` One or more package names to install
- * @param  {Function} `cb` Callback
- * @api public
- */
-
-yarn.global = function(names, cb) {
-  deps(null, 'global', names, cb);
 };
 
 /**
@@ -284,12 +312,16 @@ function deps(type, flags, names, cb) {
 }
 
 /**
- * Get the package.json for the current project
+ * Get the keys from package.json
  */
 
 function keys(prop) {
   return Object.keys(loadPkg()[prop] || {});
 }
+
+/**
+ * Get the package.json for the current project
+ */
 
 function loadPkg() {
   return JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
