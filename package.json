@@ -1,7 +1,7 @@
 {
   "name": "yarn-api",
   "description": "Basic API for yarn.",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "homepage": "https://github.com/jonschlinkert/yarn-api",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "jonschlinkert/yarn-api",
