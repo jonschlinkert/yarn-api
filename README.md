@@ -20,24 +20,28 @@ $ yarn add yarn-api
 
 ```js
 var yarn = require('yarn-api');
+
+yarn(['why', 'isobject'], function(err) {
+  if (err) throw err;
+});
 ```
 
 ## API
 
-### [yarn](index.js#L34)
+### [yarn](index.js#L33)
 
-Execute `yarn add` with the given `args`, package `names` and callback.
+Run `yarn` with the given `cmds`, `args` and callback.
 
 **Params**
 
+* `cmds` **{String|Array}**
 * `args` **{String|Array}**
-* `names` **{String|Array}**
 * `cb` **{Function}**: Callback
 
 **Example**
 
 ```js
-yarn('--save', ['isobject'], function(err) {
+yarn(['add', 'isobject'], function(err) {
   if (err) throw err;
 });
 ```
@@ -45,7 +49,7 @@ yarn('--save', ['isobject'], function(err) {
 <details>
 <summary><strong>.link</strong></summary>
 
-### [.link](index.js#L61)
+### [.link](index.js#L59)
 
 Symlink the current project to global `node_modules`. Visit the yarn docs for [link](https://yarnpkg.com/en/docs/cli/link).
 
@@ -66,7 +70,7 @@ yarn.link(function(err) {
 <details>
 <summary><strong>.unlink</strong></summary>
 
-### [.unlink](index.js#L79)
+### [.unlink](index.js#L76)
 
 Unlink a previously created symlink for a package. Visit the yarn docs for [unlink](https://yarnpkg.com/en/docs/cli/unlink).
 
@@ -87,7 +91,7 @@ yarn.unlink(function(err) {
 <details>
 <summary><strong>.add</strong></summary>
 
-### [.add](index.js#L99)
+### [.add](index.js#L95)
 
 Installs one or more packages and any packages they depend on.
 
@@ -109,9 +113,31 @@ yarn.add('isobject', function(err) {
 </details>
 
 <details>
+<summary><strong>.global</strong></summary>
+
+### [.global](index.js#L113)
+
+Execute `yarn add --global` with one or more package `names`.
+
+**Params**
+
+* `names` **{String|Array}**: One or more package names to install
+* `cb` **{Function}**: Callback
+
+**Example**
+
+```js
+yarn.global('mocha', function(err) {
+  if (err) throw err;
+});
+```
+
+</details>
+
+<details>
 <summary><strong>.install</strong></summary>
 
-### [.install](index.js#L120)
+### [.install](index.js#L133)
 
 Install all dependencies for a project. This is most commonly used when you have just checked out code for a project, or when another developer on the project has added a new dependency that you need to pick up.
 
@@ -134,11 +160,11 @@ yarn.install(function(err) {
 <details>
 <summary><strong>.outdated</strong></summary>
 
-### [.outdated](index.js#L140)
+### [.outdated](index.js#L152)
 
 Checks for outdated package dependencies.
 
-Visit the yarn docs for [outdated](https://yarnpkg.com/en/docs/cli/outdated).
+Visit the yarn docs for [outdated](https://yarnpkg.com/en/docs/cli/outdated)
 
 **Params**
 
@@ -158,7 +184,7 @@ yarn.outdated('isobject', function(err) {
 <details>
 <summary><strong>.upgrade</strong></summary>
 
-### [.upgrade](index.js#L161)
+### [.upgrade](index.js#L172)
 
 Updates all dependencies to their latest version based on the version range specified in the package.json file. The `yarn.lock` file will be (re)created as well.
 
@@ -179,9 +205,57 @@ yarn.upgrade(function(err) {
 </details>
 
 <details>
+<summary><strong>.remove</strong></summary>
+
+### [.remove](index.js#L192)
+
+Remove a package from your direct dependencies, updating your package.json and yarn.lock files in the process.
+
+Visit the yarn docs for [remove](https://yarnpkg.com/en/docs/cli/remove).
+
+**Params**
+
+* `args` **{Function}**
+* `cb` **{Function}**: Callback
+
+**Example**
+
+```js
+yarn.remove('isobject', function(err) {
+  if (err) throw err;
+});
+```
+
+</details>
+
+<details>
+<summary><strong>.why</strong></summary>
+
+### [.why](index.js#L211)
+
+Show information about why a package is installed.
+
+Visit the yarn docs for [why](https://yarnpkg.com/en/docs/cli/why).
+
+**Params**
+
+* `args` **{Function}**
+* `cb` **{Function}**: Callback
+
+**Example**
+
+```js
+yarn.why('isobject', function(err) {
+  if (err) throw err;
+});
+```
+
+</details>
+
+<details>
 <summary><strong>.dependencies</strong></summary>
 
-### [.dependencies](index.js#L180)
+### [.dependencies](index.js#L229)
 
 Execute `yarn add` with one or more package `names`. Updates `dependencies` in package.json.
 
@@ -203,7 +277,7 @@ yarn.dependencies('micromatch', function(err) {
 <details>
 <summary><strong>.devDependencies</strong></summary>
 
-### [.devDependencies](index.js#L205)
+### [.devDependencies](index.js#L253)
 
 Execute `yarn add --dev` with one or more package `names`. Updates `devDependencies` in package.json.
 
@@ -231,7 +305,7 @@ yarn.devDependencies(['micromatch', 'is-glob'], function(err) {
 <details>
 <summary><strong>.peerDependencies</strong></summary>
 
-### [.peerDependencies](index.js#L224)
+### [.peerDependencies](index.js#L271)
 
 Execute `yarn add --peer` with one or more package `names`. Updates `peerDependencies` in package.json.
 
@@ -253,7 +327,7 @@ yarn.peerDependencies('isobject', function(err) {
 <details>
 <summary><strong>.optionalDependencies</strong></summary>
 
-### [.optionalDependencies](index.js#L243)
+### [.optionalDependencies](index.js#L289)
 
 Execute `yarn add --optional` with one or more package `names`. Updates `optionalDependencies` in package.json.
 
@@ -266,28 +340,6 @@ Execute `yarn add --optional` with one or more package `names`. Updates `optiona
 
 ```js
 yarn.optionalDependencies('isobject', function(err) {
-  if (err) throw err;
-});
-```
-
-</details>
-
-<details>
-<summary><strong>.global</strong></summary>
-
-### [.global](index.js#L261)
-
-Execute `yarn add --global` with one or more package `names`.
-
-**Params**
-
-* `names` **{String|Array}**: One or more package names to install
-* `cb` **{Function}**: Callback
-
-**Example**
-
-```js
-yarn.global('mocha', function(err) {
   if (err) throw err;
 });
 ```
