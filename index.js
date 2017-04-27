@@ -1,5 +1,5 @@
 /*!
- * yarn <https://github.com/jonschlinkert/yarn>
+ * yarn-api <https://github.com/jonschlinkert/yarn-api>
  *
  * Copyright (c) 2017, Jon Schlinkert.
  * Released under the MIT License.

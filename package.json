@@ -1,12 +1,12 @@
 {
-  "name": "yarn",
-  "description": "Basic API for yarn. ",
-  "version": "0.1.0",
-  "homepage": "https://github.com/jonschlinkert/yarn",
+  "name": "yarn-api",
+  "description": "Basic API for yarn.",
+  "version": "1.0.0",
+  "homepage": "https://github.com/jonschlinkert/yarn-api",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
-  "repository": "jonschlinkert/yarn",
+  "repository": "jonschlinkert/yarn-api",
   "bugs": {
-    "url": "https://github.com/jonschlinkert/yarn/issues"
+    "url": "https://github.com/jonschlinkert/yarn-api/issues"
   },
   "license": "MIT",
   "files": [
@@ -22,7 +22,6 @@
   "dependencies": {
     "arr-flatten": "^1.0.3",
     "cross-spawn": "^5.1.0",
-    "extend-shallow": "^2.0.1",
     "find-pkg": "^0.1.2"
   },
   "devDependencies": {

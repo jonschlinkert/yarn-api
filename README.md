@@ -1,4 +1,4 @@
-# yarn [![NPM version](https://img.shields.io/npm/v/yarn.svg?style=flat)](https://www.npmjs.com/package/yarn) [![NPM monthly downloads](https://img.shields.io/npm/dm/yarn.svg?style=flat)](https://npmjs.org/package/yarn)  [![NPM total downloads](https://img.shields.io/npm/dt/yarn.svg?style=flat)](https://npmjs.org/package/yarn) [![Linux Build Status](https://img.shields.io/travis/jonschlinkert/yarn.svg?style=flat&label=Travis)](https://travis-ci.org/jonschlinkert/yarn) [![Windows Build Status](https://img.shields.io/appveyor/ci/jonschlinkert/yarn.svg?style=flat&label=AppVeyor)](https://ci.appveyor.com/project/jonschlinkert/yarn)
+# yarn-api [![NPM version](https://img.shields.io/npm/v/yarn-api.svg?style=flat)](https://www.npmjs.com/package/yarn-api) [![NPM monthly downloads](https://img.shields.io/npm/dm/yarn-api.svg?style=flat)](https://npmjs.org/package/yarn-api)  [![NPM total downloads](https://img.shields.io/npm/dt/yarn-api.svg?style=flat)](https://npmjs.org/package/yarn-api) [![Linux Build Status](https://img.shields.io/travis/jonschlinkert/yarn-api.svg?style=flat&label=Travis)](https://travis-ci.org/jonschlinkert/yarn-api) [![Windows Build Status](https://img.shields.io/appveyor/ci/jonschlinkert/yarn-api.svg?style=flat&label=AppVeyor)](https://ci.appveyor.com/project/jonschlinkert/yarn-api)
 
 > Basic API for yarn.
 
@@ -7,24 +7,24 @@
 Install with [npm](https://www.npmjs.com/):
 
 ```sh
-$ npm install --save yarn
+$ npm install --save yarn-api
 ```
 
 Install with [yarn](https://yarnpkg.com):
 
 ```sh
-$ yarn add yarn
+$ yarn add yarn-api
 ```
 
 ## Usage
 
 ```js
-var yarn = require('yarn');
+var yarn = require('yarn-api');
 ```
 
 ## API
 
-### [yarn](index.js#L35)
+### [yarn](index.js#L34)
 
 Execute `yarn add` with the given `args`, package `names` and callback.
 
@@ -45,7 +45,7 @@ yarn('--save', ['isobject'], function(err) {
 <details>
 <summary><strong>.link</strong></summary>
 
-### [.link](index.js#L62)
+### [.link](index.js#L61)
 
 Symlink the current project to global `node_modules`. Visit the yarn docs for [link](https://yarnpkg.com/en/docs/cli/link).
 
@@ -66,7 +66,7 @@ yarn.link(function(err) {
 <details>
 <summary><strong>.unlink</strong></summary>
 
-### [.unlink](index.js#L80)
+### [.unlink](index.js#L79)
 
 Unlink a previously created symlink for a package. Visit the yarn docs for [unlink](https://yarnpkg.com/en/docs/cli/unlink).
 
@@ -87,7 +87,7 @@ yarn.unlink(function(err) {
 <details>
 <summary><strong>.add</strong></summary>
 
-### [.add](index.js#L100)
+### [.add](index.js#L99)
 
 Installs one or more packages and any packages they depend on.
 
@@ -111,7 +111,7 @@ yarn.add('isobject', function(err) {
 <details>
 <summary><strong>.install</strong></summary>
 
-### [.install](index.js#L121)
+### [.install](index.js#L120)
 
 Install all dependencies for a project. This is most commonly used when you have just checked out code for a project, or when another developer on the project has added a new dependency that you need to pick up.
 
@@ -134,7 +134,7 @@ yarn.install(function(err) {
 <details>
 <summary><strong>.outdated</strong></summary>
 
-### [.outdated](index.js#L141)
+### [.outdated](index.js#L140)
 
 Checks for outdated package dependencies.
 
@@ -158,7 +158,7 @@ yarn.outdated('isobject', function(err) {
 <details>
 <summary><strong>.upgrade</strong></summary>
 
-### [.upgrade](index.js#L162)
+### [.upgrade](index.js#L161)
 
 Updates all dependencies to their latest version based on the version range specified in the package.json file. The `yarn.lock` file will be (re)created as well.
 
@@ -181,7 +181,7 @@ yarn.upgrade(function(err) {
 <details>
 <summary><strong>.dependencies</strong></summary>
 
-### [.dependencies](index.js#L181)
+### [.dependencies](index.js#L180)
 
 Execute `yarn add` with one or more package `names`. Updates `dependencies` in package.json.
 
@@ -203,7 +203,7 @@ yarn.dependencies('micromatch', function(err) {
 <details>
 <summary><strong>.devDependencies</strong></summary>
 
-### [.devDependencies](index.js#L206)
+### [.devDependencies](index.js#L205)
 
 Execute `yarn add --dev` with one or more package `names`. Updates `devDependencies` in package.json.
 
@@ -231,7 +231,7 @@ yarn.devDependencies(['micromatch', 'is-glob'], function(err) {
 <details>
 <summary><strong>.peerDependencies</strong></summary>
 
-### [.peerDependencies](index.js#L225)
+### [.peerDependencies](index.js#L224)
 
 Execute `yarn add --peer` with one or more package `names`. Updates `peerDependencies` in package.json.
 
@@ -253,7 +253,7 @@ yarn.peerDependencies('isobject', function(err) {
 <details>
 <summary><strong>.optionalDependencies</strong></summary>
 
-### [.optionalDependencies](index.js#L244)
+### [.optionalDependencies](index.js#L243)
 
 Execute `yarn add --optional` with one or more package `names`. Updates `optionalDependencies` in package.json.
 
@@ -275,7 +275,7 @@ yarn.optionalDependencies('isobject', function(err) {
 <details>
 <summary><strong>.global</strong></summary>
 
-### [.global](index.js#L262)
+### [.global](index.js#L261)
 
 Execute `yarn add --global` with one or more package `names`.
 
