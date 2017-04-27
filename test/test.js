@@ -9,9 +9,18 @@ describe('yarn', function() {
     assert.equal(typeof yarn, 'function');
   });
 
-  it('should export an object', function() {
-    assert(yarn);
-    assert.equal(typeof yarn, 'object');
+  it('should expose methods', function() {
+    assert.equal(typeof yarn.add, 'function');
+    assert.equal(typeof yarn.dependencies, 'function');
+    assert.equal(typeof yarn.devDependencies, 'function');
+    assert.equal(typeof yarn.global, 'function');
+    assert.equal(typeof yarn.install, 'function');
+    assert.equal(typeof yarn.link, 'function');
+    assert.equal(typeof yarn.optionalDependencies, 'function');
+    assert.equal(typeof yarn.outdated, 'function');
+    assert.equal(typeof yarn.peerDependencies, 'function');
+    assert.equal(typeof yarn.unlink, 'function');
+    assert.equal(typeof yarn.upgrade, 'function');
   });
 
   it('should throw an error when invalid args are passed', function() {

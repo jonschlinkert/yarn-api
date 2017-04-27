@@ -1,7 +1,7 @@
 /*!
  * yarn <https://github.com/jonschlinkert/yarn>
  *
- * Copyright (c) 2016-2017, Jon Schlinkert.
+ * Copyright (c) 2017, Jon Schlinkert.
  * Released under the MIT License.
  */
 
@@ -10,7 +10,6 @@
 var fs = require('fs');
 var path = require('path');
 var spawn = require('cross-spawn');
-var extend = require('extend-shallow');
 var findPkg = require('find-pkg');
 var flatten = require('arr-flatten');
 var pkgPath = findPkg.sync(process.cwd(), 1);
@@ -25,10 +24,10 @@ var cwd = path.dirname(pkgPath);
  *   if (err) throw err;
  * });
  * ```
- * @name .yarn
  * @param {String|Array} `args`
  * @param {String|Array} `names`
  * @param {Function} `cb` Callback
+ * @details false
  * @api public
  */
 
@@ -82,6 +81,26 @@ yarn.unlink = function(args, cb) {
 };
 
 /**
+ * Installs one or more packages and any packages they depend on.
+ *
+ * Visit the yarn docs for [add](https://yarnpkg.com/en/docs/cli/add).
+ *
+ * ```js
+ * yarn.add('isobject', function(err) {
+ *   if (err) throw err;
+ * });
+ * ```
+ * @name .add
+ * @param {String|Array} `names` package names
+ * @param {Function} `cb` Callback
+ * @api public
+ */
+
+yarn.add = function(args, cb) {
+  yarn('add', args, cb);
+};
+
+/**
  * Install all dependencies for a project. This is most commonly used when
  * you have just checked out code for a project, or when another developer
  * on the project has added a new dependency that you need to pick up.
@@ -100,26 +119,6 @@ yarn.unlink = function(args, cb) {
 
 yarn.install = function(args, cb) {
   yarn('install', args, cb);
-};
-
-/**
- * Installs one or more packages and any packages they depend on.
- *
- * Visit the yarn docs for [add](https://yarnpkg.com/en/docs/cli/add).
- *
- * ```js
- * yarn.add('isobject', function(err) {
- *   if (err) throw err;
- * });
- * ```
- * @name .add
- * @param {String|Array} `names` package names
- * @param {Function} `cb` Callback
- * @api public
- */
-
-yarn.add = function(args, cb) {
-  yarn('add', args, cb);
 };
 
 /**
@@ -173,7 +172,7 @@ yarn.upgrade = function(args, cb) {
  * });
  * ```
  * @name .dependencies
- * @param {String|Array} `names`
+ * @param {String|Array} `names` One or more package names to install
  * @param {Function} `cb` Callback
  * @api public
  */
@@ -217,7 +216,7 @@ yarn.devDependencies = function(names, cb) {
  * });
  * ```
  * @name .peerDependencies
- * @param {String|Array} `names`
+ * @param {String|Array} `names` One or more package names to install
  * @param {Function} `cb` Callback
  * @api public
  */
@@ -236,7 +235,7 @@ yarn.peerDependencies = function(names, cb) {
  * });
  * ```
  * @name .optionalDependencies
- * @param {String|Array} `names`
+ * @param {String|Array} `names` One or more package names to install
  * @param {Function} `cb` Callback
  * @api public
  */
@@ -254,7 +253,7 @@ yarn.optionalDependencies = function(names, cb) {
  * });
  * ```
  * @name .global
- * @param  {String|Array} `names`
+ * @param {String|Array} `names` One or more package names to install
  * @param  {Function} `cb` Callback
  * @api public
  */
