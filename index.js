@@ -154,6 +154,24 @@ yarn.outdated = function(args, cb) {
 };
 
 /**
+ * Creates a compressed gzip archive of package dependencies.
+ *
+ * Visit the yarn docs for [pack][cli]{pack}.
+ *
+ * ```js
+ * yarn.pack(function(err) {
+     if (err) throw err;
+   });
+ * ```
+ * @param {Function} `cb` Callback
+ * @api public
+ */
+
+yarn.pack = function(args, cb) {
+  yarn('pack', args, cb);
+};
+
+/**
  * Updates all dependencies to their latest version based on the version
  * range specified in the package.json file. The `yarn.lock` file will be
  * (re)created as well.

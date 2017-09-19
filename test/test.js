@@ -18,6 +18,7 @@ describe('yarn', function() {
     assert.equal(typeof yarn.link, 'function');
     assert.equal(typeof yarn.optionalDependencies, 'function');
     assert.equal(typeof yarn.outdated, 'function');
+    assert.equal(typeof yarn.pack, 'function');
     assert.equal(typeof yarn.peerDependencies, 'function');
     assert.equal(typeof yarn.unlink, 'function');
     assert.equal(typeof yarn.upgrade, 'function');
