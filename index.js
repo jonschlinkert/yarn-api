@@ -36,12 +36,12 @@ function yarn(cmds, args, cb) {
   }
 
   args = arrayify(cmds).concat(arrayify(args));
-  spawn('yarn', args, {cwd: cwd, stdio: 'inherit'})
+  spawn('yarn', args, { cwd: cwd, stdio: 'inherit' })
     .on('error', cb)
     .on('close', function(code, err) {
       cb(err, code);
     });
-};
+}
 
 /**
  * Symlink the current project to global `node_modules`.
@@ -94,6 +94,28 @@ yarn.unlink = function(args, cb) {
 
 yarn.add = function(args, cb) {
   yarn('add', args, cb);
+};
+
+/**
+ * Installs one package with alias.
+ * You can alias a package by using `yarn add fake-name@npm:left-pad`.
+ * Now you can use `require("fake-name")` to require left-pad.
+ *
+ * Visit the yarn docs for [add][cli]{add}.
+ *
+ * ```js
+ * yarn.add('isobject', 'myAlias', function(err) {
+ *   if (err) throw err;
+ * });
+ * ```
+ * @param {String} `name` package name
+ * @param {String} `alias` package alias
+ * @param {Function} `cb` Callback
+ * @api public
+ */
+
+yarn.addWithAlias = function(name, alias, cb) {
+  yarn('add', [alias, '@npm:', args], cb);
 };
 
 /**
