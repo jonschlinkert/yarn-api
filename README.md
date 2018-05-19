@@ -346,6 +346,30 @@ yarn.optionalDependencies('isobject', function(err) {
 
 </details>
 
+<details>
+<summary><strong>.addWithAlias</strong></summary>
+
+### [.addWithAlias](index.js#L117)
+
+Execute `yarn add fake-name@module-name`. Install the module with a fake-name called alias.
+run require('fake-name') to use the module
+It's Yarn tip
+
+**Params**
+
+* `name` **{String}**: One package name to install
+* `alias` **{String}**: package alias to use
+* `cb` **{Function}**: Callback
+
+**Example**
+
+```js
+yarn.addWithAlias('isobject','fake-name', function(err) {
+  if (err) throw err;
+});
+```
+
+</details>
 ## About
 
 ### Contributing

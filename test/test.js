@@ -11,6 +11,7 @@ describe('yarn', function() {
 
   it('should expose methods', function() {
     assert.equal(typeof yarn.add, 'function');
+    assert.equal(typeof yarn.addWithAlias, 'function');
     assert.equal(typeof yarn.dependencies, 'function');
     assert.equal(typeof yarn.devDependencies, 'function');
     assert.equal(typeof yarn.global, 'function');
